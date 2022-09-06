@@ -1,5 +1,5 @@
 # Causal_mapping_Marconi
-Code for the generation of causal maps for Marconi100. 
+Code for the generation of causal maps for Marconi100, by using the model of the paper ["Causal Discovery with Attention-Based Convolutional Neural Networks"](https://www.mdpi.com/2504-4990/1/1/19).
 # How to run it?
 Run the file `main_marconi.py` in order to generate the map of the input node (change the variable node in the code, for using different nodes).
 # Results
