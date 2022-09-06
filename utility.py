@@ -186,6 +186,5 @@ def plot_graph(cause_effect_map,col_names,filename,confidence):
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=cause_effect_named)
     nx.draw(graph, pos, with_labels=True)
     nx.draw_networkx(graph, pos=pos)
-    plt.savefig("graph_one_dataset.png", format="PNG")
     plt.show()
     nx.write_graphml(graph, "./results/{}_{}.graphml".format(filename,confidence))

@@ -27,9 +27,9 @@ levels = 2      #   >2 in order to add middle layers
 kernel_size = 4 #   size of the window
 dilation = 4    #   dilation of the convolution
 lr = 0.1
-epochs = 400
+epochs = 4
 batch_size = 8
-confidence = 1
+confidence = 0.9
 
 dict_loss_anomalies = {}
 map_dataframes_x_train = {}
@@ -109,5 +109,5 @@ if gt_name != "":
     f1,f1_prime = compute_f1(pr_cause_effect_map,cause_effect_map,cause_effect_extended_map,depth)
     print("F1 score: "+str(f1))
     print("F1 prime score: " + str(f1_prime))
-plot_graph(pr_cause_effect_map, list(map_dataframes_train.keys()),node)
+plot_graph(pr_cause_effect_map, list(map_dataframes_train.keys()),node,confidence)
 
