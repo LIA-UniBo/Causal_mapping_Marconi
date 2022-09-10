@@ -1,11 +1,7 @@
-import torch
-
-from TCDF_net import ADDSTCN
-from TCDF_net import *
+from Networks.TCDF_net import *
 from torch import optim
 from tqdm import trange
 import torch.nn as nn
-import math
 import numpy as np
 import random
 import math

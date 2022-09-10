@@ -1,10 +1,5 @@
-import pandas as pd
 from utility import *
-from TCDF_net import *
-from torch import optim
-from tqdm import trange
-import torch.nn as nn
-from TCDF_module import *
+from Modules.TCDF_module import *
 
 
 file_name = "Data/Demo_data/demo_dataset.csv"

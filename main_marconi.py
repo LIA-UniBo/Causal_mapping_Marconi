@@ -1,15 +1,8 @@
 import os
 
-import pandas as pd
-import torch
-
 from DatasetMarconi import DatasetMarconi
 from utility import *
-from TCDF_net import *
-from torch import optim
-from tqdm import trange
-import torch.nn as nn
-from TCDF_module import *
+from Modules.TCDF_module import *
 from torch.utils.data import DataLoader
 
 
@@ -20,16 +13,16 @@ depth = 2
 device = torch.device("cpu" if torch.cuda.is_available() else "cpu") #for now using only cpu
 split = True
 loss = nn.MSELoss()
-node = "r207n02" #merged for considering multiple nodes
+node = "r205n12" #merged for considering multiple nodes
 
 #Hyper-parameters
 levels = 2      #   >2 in order to add middle layers
 kernel_size = 4 #   size of the window
 dilation = 4    #   dilation of the convolution
 lr = 0.1
-epochs = 4
+epochs = 400
 batch_size = 8
-confidence = 0.9
+confidence = 0.8
 
 dict_loss_anomalies = {}
 map_dataframes_x_train = {}

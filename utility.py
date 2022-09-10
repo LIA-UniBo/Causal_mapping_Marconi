@@ -70,6 +70,27 @@ def preprocessing(df,target):
     y = y.unsqueeze(0)
     return x,y
 
+def preprocessing_validation(df,features,target):
+    if target in features:
+        df = df[features]
+        copy_df = df.copy()
+        y = copy_df[[target]]
+        y_shifted = y.shift(axis=0)
+        copy_df[target] = y_shifted.fillna(0)
+        x = torch.from_numpy(copy_df.values.astype('float32').transpose())
+        y = torch.from_numpy(y.values.astype('float32').transpose())
+        x = x.unsqueeze(0)
+        y = y.unsqueeze(0)
+    else:
+        x = df[features]
+        y = df[[target]]
+        x = torch.from_numpy(x.values.astype('float32').transpose())
+        y = torch.from_numpy(y.values.astype('float32').transpose())
+        x = x.unsqueeze(0)
+        y = y.unsqueeze(0)
+    return x, y
+
+
 def split_train_val_test(x,y):
     size = x.shape[2]
     index_test = int(size*80/100)
@@ -164,7 +185,23 @@ def compute_f1(pr_cause_effect_map, gt_cause_effect_map, depth):
     return f1,f1_prime
 
 
+def find_causes(graphml,effect):
+    graph = nx.read_graphml(graphml)
+    edges = graph.edges(data=True)
+    causes = []
+    for edge in edges:
+        if edge[1]==effect:
+            causes.append(edge[0])
+    return causes
 
+def find_indipendent_feature(graphml,effect,distance):
+    graph = nx.read_graphml(graphml)
+    all_path = nx.shortest_path_length(graph, target=effect)
+    features = []
+    for key in all_path:
+        if all_path[key] <= distance:
+            features.append(key)
+    return features
 
 
 def plot_graph(cause_effect_map,col_names,filename,confidence):
@@ -188,3 +225,5 @@ def plot_graph(cause_effect_map,col_names,filename,confidence):
     nx.draw_networkx(graph, pos=pos)
     plt.show()
     nx.write_graphml(graph, "./results/{}_{}.graphml".format(filename,confidence))
+
+

@@ -1,12 +1,7 @@
 import os
-import pandas as pd
 from DatasetMarconi import DatasetMarconi
 from utility import *
-from TCDF_net import *
-from torch import optim
-from tqdm import trange
-import torch.nn as nn
-from TCDF_module import *
+from Modules.TCDF_module import *
 from torch.utils.data import DataLoader
 
 device = torch.device("cpu" if torch.cuda.is_available() else "cpu")

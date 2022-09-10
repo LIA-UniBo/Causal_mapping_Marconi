@@ -35,11 +35,11 @@
 <node id="ps0_output_volta"/>
 <node id="pkts_out"/>
 <node id="gpu1_mem_temp"/>
-<edge source="fan0_1" target="fan_disk_power">
+<edge source="fan0_1" target="fan0_0">
   <data key="d0">0</data>
 </edge>
-<edge source="gpu1_core_temp" target="gpu1_mem_temp">
-  <data key="d0">0</data>
+<edge source="gpu1_core_temp" target="gpu1_core_temp">
+  <data key="d0">1</data>
 </edge>
 <edge source="p1_mem_power" target="p1_mem_power">
   <data key="d0">1</data>
@@ -48,34 +48,49 @@
   <data key="d0">0</data>
 </edge>
 <edge source="pkts_in" target="pkts_in">
-  <data key="d0">5</data>
+  <data key="d0">1</data>
 </edge>
-<edge source="pkts_in" target="pkts_out">
+<edge source="gpu4_core_temp" target="p1_mem_power">
+  <data key="d0">4</data>
+</edge>
+<edge source="gpu4_core_temp" target="p0_mem_power">
   <data key="d0">0</data>
 </edge>
-<edge source="gpu4_core_temp" target="ps0_input_power">
+<edge source="gpu4_core_temp" target="gpu3_core_temp">
+  <data key="d0">0</data>
+</edge>
+<edge source="gpu4_core_temp" target="ps0_output_volta">
+  <data key="d0">0</data>
+</edge>
+<edge source="pcie" target="gpu4_core_temp">
+  <data key="d0">0</data>
+</edge>
+<edge source="pcie" target="fan0_0">
+  <data key="d0">8</data>
+</edge>
+<edge source="pcie" target="gpu3_core_temp">
   <data key="d0">0</data>
 </edge>
 <edge source="p0_mem_power" target="p1_mem_power">
   <data key="d0">0</data>
 </edge>
-<edge source="p0_mem_power" target="p0_mem_power">
-  <data key="d0">1</data>
+<edge source="p0_power" target="p0_mem_power">
+  <data key="d0">2</data>
 </edge>
-<edge source="p0_power" target="p1_mem_power">
+<edge source="p0_power" target="fan0_0">
   <data key="d0">12</data>
 </edge>
-<edge source="p0_power" target="p0_power">
-  <data key="d0">1</data>
+<edge source="p0_power" target="gpu3_core_temp">
+  <data key="d0">8</data>
 </edge>
 <edge source="p0_power" target="p0_vdd_temp">
   <data key="d0">0</data>
 </edge>
-<edge source="p0_power" target="cpu_idle">
-  <data key="d0">0</data>
+<edge source="p0_power" target="p0_io_power">
+  <data key="d0">4</data>
 </edge>
-<edge source="p0_power" target="ps0_input_power">
-  <data key="d0">8</data>
+<edge source="gpu0_core_temp" target="p1_mem_power">
+  <data key="d0">12</data>
 </edge>
 <edge source="gpu0_core_temp" target="gpu0_core_temp">
   <data key="d0">1</data>
@@ -83,185 +98,161 @@
 <edge source="gpu0_core_temp" target="gpu0_mem_temp">
   <data key="d0">4</data>
 </edge>
-<edge source="gpu0_core_temp" target="cpu_idle">
-  <data key="d0">3</data>
+<edge source="mem_cached" target="mem_free">
+  <data key="d0">4</data>
 </edge>
-<edge source="mem_cached" target="mem_cached">
-  <data key="d0">1</data>
+<edge source="gpu0_mem_temp" target="gpu1_core_temp">
+  <data key="d0">0</data>
 </edge>
-<edge source="gpu0_mem_temp" target="gpu0_mem_temp">
-  <data key="d0">1</data>
+<edge source="gpu0_mem_temp" target="p0_io_power">
+  <data key="d0">12</data>
 </edge>
-<edge source="gpu0_mem_temp" target="cpu_idle">
-  <data key="d0">13</data>
+<edge source="gpu0_mem_temp" target="ps0_input_power">
+  <data key="d0">0</data>
+</edge>
+<edge source="fan_disk_power" target="p0_mem_power">
+  <data key="d0">15</data>
 </edge>
 <edge source="fan_disk_power" target="gpu0_core_temp">
   <data key="d0">5</data>
 </edge>
-<edge source="fan_disk_power" target="fan_disk_power">
-  <data key="d0">2</data>
-</edge>
-<edge source="fan_disk_power" target="cpu_idle">
-  <data key="d0">12</data>
+<edge source="fan_disk_power" target="p0_vdd_temp">
+  <data key="d0">0</data>
 </edge>
 <edge source="ps1_output_volta" target="ps1_output_volta">
   <data key="d0">1</data>
 </edge>
+<edge source="ps1_output_volta" target="fan0_0">
+  <data key="d0">8</data>
+</edge>
 <edge source="ps1_output_volta" target="ps0_output_volta">
   <data key="d0">0</data>
-</edge>
-<edge source="proc_total" target="p1_mem_power">
-  <data key="d0">10</data>
-</edge>
-<edge source="proc_total" target="gpu0_core_temp">
-  <data key="d0">4</data>
 </edge>
 <edge source="fan0_0" target="fan0_1">
   <data key="d0">0</data>
 </edge>
-<edge source="fan0_0" target="p1_mem_power">
-  <data key="d0">8</data>
+<edge source="fan0_0" target="p0_mem_power">
+  <data key="d0">5</data>
 </edge>
-<edge source="fan0_0" target="fan0_0">
-  <data key="d0">1</data>
+<edge source="fan0_0" target="gpu0_core_temp">
+  <data key="d0">0</data>
 </edge>
-<edge source="fan0_0" target="p0_vdd_temp">
-  <data key="d0">4</data>
+<edge source="fan0_0" target="fan_disk_power">
+  <data key="d0">0</data>
 </edge>
-<edge source="ambient" target="p0_power">
+<edge source="gpu3_core_temp" target="pcie">
   <data key="d0">0</data>
 </edge>
 <edge source="gpu3_core_temp" target="gpu0_core_temp">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu3_core_temp" target="mem_cached">
   <data key="d0">4</data>
 </edge>
-<edge source="gpu3_core_temp" target="gpu3_mem_temp">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu3_core_temp" target="ps0_output_volta">
-  <data key="d0">4</data>
-</edge>
-<edge source="mem_free" target="p0_vdd_temp">
-  <data key="d0">4</data>
-</edge>
-<edge source="p0_vdd_temp" target="p0_mem_power">
-  <data key="d0">0</data>
-</edge>
-<edge source="p0_vdd_temp" target="p0_power">
-  <data key="d0">4</data>
-</edge>
-<edge source="p0_vdd_temp" target="p0_io_power">
-  <data key="d0">0</data>
-</edge>
-<edge source="p0_vdd_temp" target="cpu_idle">
+<edge source="gpu3_core_temp" target="ps1_output_volta">
   <data key="d0">6</data>
 </edge>
-<edge source="p0_vdd_temp" target="p1_vdd_temp">
+<edge source="gpu3_core_temp" target="gpu3_core_temp">
+  <data key="d0">1</data>
+</edge>
+<edge source="mem_free" target="p0_mem_power">
   <data key="d0">0</data>
 </edge>
-<edge source="p0_io_power" target="mem_cached">
+<edge source="mem_free" target="ps1_output_volta">
+  <data key="d0">4</data>
+</edge>
+<edge source="mem_free" target="mem_free">
+  <data key="d0">1</data>
+</edge>
+<edge source="p0_vdd_temp" target="p1_mem_power">
+  <data key="d0">4</data>
+</edge>
+<edge source="p0_vdd_temp" target="fan_disk_power">
+  <data key="d0">0</data>
+</edge>
+<edge source="p0_io_power" target="pcie">
   <data key="d0">8</data>
 </edge>
-<edge source="p0_io_power" target="p0_vdd_temp">
+<edge source="p0_io_power" target="p0_mem_power">
+  <data key="d0">0</data>
+</edge>
+<edge source="p0_io_power" target="mem_free">
   <data key="d0">0</data>
 </edge>
 <edge source="p0_io_power" target="p0_io_power">
   <data key="d0">1</data>
 </edge>
-<edge source="p0_io_power" target="p1_io_power">
+<edge source="cpu_idle" target="p0_mem_power">
   <data key="d0">0</data>
 </edge>
 <edge source="cpu_idle" target="p0_power">
-  <data key="d0">4</data>
+  <data key="d0">0</data>
 </edge>
 <edge source="cpu_idle" target="cpu_idle">
   <data key="d0">1</data>
 </edge>
-<edge source="cpu_idle" target="p1_io_power">
-  <data key="d0">4</data>
-</edge>
-<edge source="cpu_aidle" target="fan0_0">
-  <data key="d0">11</data>
-</edge>
-<edge source="cpu_aidle" target="p0_vdd_temp">
+<edge source="cpu_idle" target="proc_run">
   <data key="d0">0</data>
 </edge>
-<edge source="cpu_aidle" target="p0_io_power">
-  <data key="d0">3</data>
+<edge source="cpu_aidle" target="pcie">
+  <data key="d0">4</data>
 </edge>
-<edge source="cpu_aidle" target="cpu_idle">
-  <data key="d0">13</data>
+<edge source="cpu_aidle" target="p0_mem_power">
+  <data key="d0">6</data>
 </edge>
-<edge source="p1_vdd_temp" target="p1_mem_power">
+<edge source="cpu_aidle" target="gpu3_core_temp">
+  <data key="d0">1</data>
+</edge>
+<edge source="p1_vdd_temp" target="pcie">
   <data key="d0">0</data>
 </edge>
 <edge source="p1_vdd_temp" target="p0_mem_power">
-  <data key="d0">12</data>
-</edge>
-<edge source="p1_vdd_temp" target="p0_vdd_temp">
   <data key="d0">8</data>
 </edge>
-<edge source="p1_vdd_temp" target="p0_io_power">
-  <data key="d0">8</data>
-</edge>
-<edge source="p1_vdd_temp" target="cpu_idle">
+<edge source="p1_vdd_temp" target="p0_power">
   <data key="d0">0</data>
 </edge>
-<edge source="p1_vdd_temp" target="p1_vdd_temp">
+<edge source="p1_vdd_temp" target="gpu0_mem_temp">
   <data key="d0">1</data>
 </edge>
-<edge source="p1_io_power" target="p0_io_power">
+<edge source="p1_vdd_temp" target="gpu3_core_temp">
+  <data key="d0">10</data>
+</edge>
+<edge source="p1_vdd_temp" target="p1_io_power">
   <data key="d0">0</data>
 </edge>
-<edge source="p1_io_power" target="p1_vdd_temp">
+<edge source="p1_io_power" target="p1_mem_power">
+  <data key="d0">0</data>
+</edge>
+<edge source="p1_io_power" target="cpu_idle">
   <data key="d0">0</data>
 </edge>
 <edge source="p1_io_power" target="p1_io_power">
   <data key="d0">1</data>
 </edge>
-<edge source="cpu_system" target="cpu_idle">
-  <data key="d0">8</data>
+<edge source="p1_io_power" target="p1_power">
+  <data key="d0">0</data>
 </edge>
-<edge source="cpu_system" target="cpu_system">
-  <data key="d0">1</data>
+<edge source="p1_io_power" target="ps0_input_power">
+  <data key="d0">0</data>
 </edge>
-<edge source="gpu3_mem_temp" target="p1_mem_power">
+<edge source="cpu_system" target="gpu1_core_temp">
   <data key="d0">4</data>
 </edge>
 <edge source="gpu3_mem_temp" target="gpu4_core_temp">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu3_mem_temp" target="pcie">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu3_mem_temp" target="gpu0_core_temp">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu3_mem_temp" target="gpu3_core_temp">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu3_mem_temp" target="p0_io_power">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu3_mem_temp" target="ps0_input_power">
   <data key="d0">4</data>
 </edge>
-<edge source="gpu3_mem_temp" target="gpu1_mem_temp">
+<edge source="gpu3_mem_temp" target="gpu0_mem_temp">
   <data key="d0">0</data>
 </edge>
-<edge source="proc_run" target="p0_vdd_temp">
+<edge source="gpu3_mem_temp" target="gpu3_mem_temp">
+  <data key="d0">1</data>
+</edge>
+<edge source="proc_run" target="fan0_1">
+  <data key="d0">14</data>
+</edge>
+<edge source="proc_run" target="cpu_system">
   <data key="d0">12</data>
 </edge>
-<edge source="proc_run" target="p1_io_power">
-  <data key="d0">4</data>
-</edge>
-<edge source="ps0_input_voltag" target="pcie">
-  <data key="d0">13</data>
-</edge>
-<edge source="ps0_input_voltag" target="cpu_system">
-  <data key="d0">12</data>
+<edge source="proc_run" target="p1_power">
+  <data key="d0">0</data>
 </edge>
 <edge source="ps0_input_voltag" target="ps0_input_voltag">
   <data key="d0">1</data>
@@ -269,79 +260,88 @@
 <edge source="p1_power" target="pcie">
   <data key="d0">4</data>
 </edge>
-<edge source="p1_power" target="p0_power">
-  <data key="d0">4</data>
+<edge source="p1_power" target="p0_mem_power">
+  <data key="d0">0</data>
 </edge>
 <edge source="p1_power" target="p0_vdd_temp">
   <data key="d0">0</data>
 </edge>
-<edge source="p1_power" target="cpu_idle">
-  <data key="d0">12</data>
-</edge>
-<edge source="p1_power" target="cpu_system">
+<edge source="p1_power" target="p1_vdd_temp">
   <data key="d0">0</data>
 </edge>
-<edge source="p1_power" target="ps0_input_voltag">
+<edge source="p1_power" target="p1_io_power">
+  <data key="d0">0</data>
+</edge>
+<edge source="p1_power" target="p1_power">
   <data key="d0">1</data>
 </edge>
-<edge source="ps0_input_power" target="fan0_0">
-  <data key="d0">0</data>
-</edge>
-<edge source="ps0_input_power" target="p0_io_power">
+<edge source="ps0_input_power" target="gpu0_core_temp">
   <data key="d0">4</data>
 </edge>
-<edge source="ps0_input_power" target="p1_power">
+<edge source="ps0_input_power" target="ps1_output_volta">
+  <data key="d0">4</data>
+</edge>
+<edge source="ps0_input_power" target="p0_vdd_temp">
+  <data key="d0">0</data>
+</edge>
+<edge source="ps0_input_power" target="gpu3_mem_temp">
   <data key="d0">0</data>
 </edge>
 <edge source="ps0_input_power" target="ps0_input_power">
   <data key="d0">1</data>
 </edge>
-<edge source="ps0_input_power" target="ps0_output_volta">
-  <data key="d0">4</data>
+<edge source="ps0_input_power" target="gpu1_mem_temp">
+  <data key="d0">0</data>
 </edge>
 <edge source="bytes_in" target="pkts_in">
   <data key="d0">0</data>
 </edge>
-<edge source="bytes_in" target="p0_vdd_temp">
-  <data key="d0">11</data>
+<edge source="bytes_in" target="p0_mem_power">
+  <data key="d0">0</data>
 </edge>
-<edge source="bytes_in" target="pkts_out">
-  <data key="d0">2</data>
+<edge source="bytes_in" target="cpu_system">
+  <data key="d0">14</data>
 </edge>
-<edge source="ps0_output_volta" target="fan0_1">
+<edge source="bytes_in" target="bytes_in">
+  <data key="d0">9</data>
+</edge>
+<edge source="ps0_output_volta" target="pcie">
   <data key="d0">0</data>
 </edge>
 <edge source="ps0_output_volta" target="ps1_output_volta">
   <data key="d0">0</data>
 </edge>
-<edge source="ps0_output_volta" target="cpu_idle">
-  <data key="d0">13</data>
-</edge>
-<edge source="ps0_output_volta" target="gpu3_mem_temp">
-  <data key="d0">0</data>
+<edge source="ps0_output_volta" target="cpu_system">
+  <data key="d0">14</data>
 </edge>
 <edge source="ps0_output_volta" target="ps0_input_voltag">
-  <data key="d0">6</data>
+  <data key="d0">0</data>
+</edge>
+<edge source="ps0_output_volta" target="ps0_input_power">
+  <data key="d0">4</data>
 </edge>
 <edge source="ps0_output_volta" target="ps0_output_volta">
   <data key="d0">1</data>
 </edge>
-<edge source="pkts_out" target="pcie">
+<edge source="pkts_out" target="pkts_in">
   <data key="d0">0</data>
 </edge>
-<edge source="pkts_out" target="pkts_out">
-  <data key="d0">1</data>
+<edge source="pkts_out" target="cpu_system">
+  <data key="d0">7</data>
 </edge>
-<edge source="gpu1_mem_temp" target="gpu1_core_temp">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu1_mem_temp" target="cpu_system">
-  <data key="d0">0</data>
-</edge>
-<edge source="gpu1_mem_temp" target="p1_power">
+<edge source="pkts_out" target="bytes_in">
   <data key="d0">4</data>
 </edge>
-<edge source="gpu1_mem_temp" target="ps0_output_volta">
-  <data key="d0">3</data>
+<edge source="gpu1_mem_temp" target="pcie">
+  <data key="d0">12</data>
+</edge>
+<edge source="gpu1_mem_temp" target="gpu0_core_temp">
+  <data key="d0">4</data>
+</edge>
+<edge source="gpu1_mem_temp" target="fan0_0">
+  <data key="d0">12</data>
+</edge>
+<edge source="gpu1_mem_temp" target="gpu1_mem_temp">
+  <data key="d0">1</data>
 </edge>
 </graph></graphml>
