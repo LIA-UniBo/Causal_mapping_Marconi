@@ -49,10 +49,10 @@ class MLP(nn.Module):
 graph = "./results/merged_0.8.graphml"
 G = nx.read_graphml(graph)
 G = nx.DiGraph(G)
-feature = 'cpu_idle'
-causes = find_causes('./results/merged_0.8.graphml', feature)
+feature = 'fan0_1'
+causes, weights = find_causes_weights('./results/merged_0.8.graphml', feature)
 causes.append(feature)
-
+print(weights)
 df = pd.read_csv('./Data/Marconi_data/sliced_data_r205n12/train/slice_0.csv')
 df = df[causes]
 
