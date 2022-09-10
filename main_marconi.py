@@ -13,7 +13,7 @@ depth = 2
 device = torch.device("cpu" if torch.cuda.is_available() else "cpu") #for now using only cpu
 split = True
 loss = nn.MSELoss()
-node = "r205n12" #merged for considering multiple nodes
+node = "r207n02" #merged for considering multiple nodes
 
 #Hyper-parameters
 levels = 2      #   >2 in order to add middle layers
