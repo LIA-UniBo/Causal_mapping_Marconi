@@ -194,13 +194,14 @@ def find_causes(graphml,effect):
             causes.append(edge[0])
     return causes
 
-def find_indipendent_feature(graphml,effect,distance):
+def find_indipendent_feature(graphml,effect,distance=4):
     graph = nx.read_graphml(graphml)
-    all_path = nx.shortest_path_length(graph, target=effect)
-    features = []
+    all_path = nx.shortest_path_length(graph,source=None,target=effect)
+    dipendent_features = []
     for key in all_path:
-        if all_path[key] <= distance:
-            features.append(key)
+        if all_path[key] < distance:
+            dipendent_features.append(key)
+    features = list(set(graph.nodes()) - set(dipendent_features))
     return features
 
 
