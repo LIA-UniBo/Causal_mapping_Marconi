@@ -6,6 +6,8 @@ import torch.utils.data.dataloader as dataloader
 import pandas as pd
 from utility import *
 import networkx as nx
+from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
 
 
 class DatasetPredMarconi:
@@ -32,16 +34,14 @@ class MLP(nn.Module):
         # fully connected layer
         self.fc1 = nn.Linear(n_inputs, 64)
         # fully connected layer
-        self.fc2 = nn.Linear(64, 128)
-        # fully connected layer
-        self.fc3 = nn.Linear(128, 1)
+        self.fc2 = nn.Linear(64, 1)
  
     # forward propagate input
     def forward(self, X):
         
         X = F.relu(self.fc1(X))
-        X = F.relu(self.fc2(X))
-        X = self.fc3(X)
+        #X = F.relu(self.fc2(X))
+        X = self.fc2(X)
         
         return X
 
@@ -49,16 +49,28 @@ class MLP(nn.Module):
 graph = "./results/merged_0.8.graphml"
 G = nx.read_graphml(graph)
 G = nx.DiGraph(G)
-feature = 'fan0_1'
-causes, weights = find_causes_weights('./results/merged_0.8.graphml', feature)
+feature = 'gpu1_mem_temp'
+causes, weights = find_causes_weights_noloop('./results/merged_0.8.graphml', feature)
+total = []
+for i in causes:
+    cause, weight = find_causes_weights_noloop('./results/merged_0.8.graphml', i)
+    total.extend(cause)
+    for j in weight:
+        weights[j] = weights[i] + weight[j]
+total.extend(causes)
+
+causes = total
 causes.append(feature)
-print(weights)
+print(causes, weights)
 df = pd.read_csv('./Data/Marconi_data/sliced_data_r205n12/train/slice_0.csv')
 df = df[causes]
 
+#for col in weights:
+ #   df[col] = df[col].shift(weights[col])
 
+df = df.fillna(0)
 
-train_data = DatasetPredMarconi(df)
+train_data = DataLoader(DatasetPredMarconi(df))
 dataset_len = len(train_data)
 
 n_inputs = len(causes) - 1
@@ -67,7 +79,8 @@ criterion = nn.MSELoss()
 optimizer = optim.Adam(net.parameters(), lr=0.001)
 
 #train
-for epoch in range(100):
+value_loss = []
+for epoch in range(30):
     running_loss = 0.0
     for i, value in enumerate(train_data):
         inputs = value['data']
@@ -78,10 +91,15 @@ for epoch in range(100):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+    value_loss.append((running_loss/dataset_len))
     print('Epoch:', epoch, 'loss:', running_loss/dataset_len)
 
+#plt.show(value_loss)
+
 #test
-test_data = DatasetPredMarconi('./Data/Marconi_data/sliced_data_r205n12/test/slice_31.csv')
+df = pd.read_csv('./Data/Marconi_data/sliced_data_r205n12/test/slice_31.csv')
+df = df[causes]
+test_data = DatasetPredMarconi(df)
 dataset_len = len(test_data)
 
 running_loss = 0.0
@@ -98,17 +116,5 @@ for i, value in enumerate(test_data):
 print('Test loss:', running_loss/dataset_len)
 
 
-batch_sizes = []
-lr_l = []
-dense_sizes = []
-epochs = []
 
-for b_s in batch_sizes:
-    for d_s in dense_sizes:
-        for lr in lr_l:
-            for epoch in epochs:
-                print("Grid search for :")
-                print("     Epochs: "+str(epoch))
-                print("         Dense size: "+str(d_s))
-                print("             Lr: "+str(lr))
         
