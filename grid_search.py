@@ -5,6 +5,7 @@ from Modules.TCDF_module import *
 from torch.utils.data import DataLoader
 
 device = torch.device("cpu" if torch.cuda.is_available() else "cpu")
+node = "r215n10"
 levels_list = [2]
 kernel_size_list = [4]
 lr_list = [1e-1]
@@ -15,23 +16,23 @@ split = True
 
 
 #find columns name
-for file in os.listdir("Data/Marconi_data/sliced_data_merged/train"):
-    df_train = pd.read_csv("Data/Marconi_data/sliced_data_merged/train/{}".format(file))
+for file in os.listdir("Data/Marconi_data/sliced_data_{}/train".format(node)):
+    df_train = pd.read_csv("Data/Marconi_data/sliced_data_{}/train/{}".format(node,file))
     columns = df_train.columns
     break
 
 map_dataframes_train = {col: DatasetMarconi() for col in columns}
 map_dataframes_val = {col: DatasetMarconi() for col in columns}
 
-for file in os.listdir("Data/Marconi_data/sliced_data_merged/train"):
-    df_train = pd.read_csv("Data/Marconi_data/sliced_data_merged/train/{}".format(file))
+for file in os.listdir("Data/Marconi_data/sliced_data_{}/train".format(node)):
+    df_train = pd.read_csv("Data/Marconi_data/sliced_data_{}/train/{}".format(node,file))
     for col in columns:
         x_train = preprocessing(df_train, col)[0]
         y_train = preprocessing(df_train, col)[1]
         map_dataframes_train[col].append(x_train,y_train)
 
-for file in os.listdir("Data/Marconi_data/sliced_data_merged/validation"):
-    df_val = pd.read_csv("Data/Marconi_data/sliced_data_merged/validation/{}".format(file))
+for file in os.listdir("Data/Marconi_data/sliced_data_{}/validation".format(node)):
+    df_val = pd.read_csv("Data/Marconi_data/sliced_data_{}/validation/{}".format(node,file))
     for col in columns:
         x_val = preprocessing(df_val, col)[0]
         y_val = preprocessing(df_val, col)[1]
@@ -70,9 +71,9 @@ for levels in levels_list:
             df_loss_val = pd.DataFrame.from_dict(history_loss_val)
             df_loss_train['average'] = df_loss_train.mean(numeric_only=True, axis=1)
             df_loss_val['average'] = df_loss_val.mean(numeric_only=True, axis=1)
-            df_loss_train.to_excel("./Grid_search/levels_{}_kernel_{}_lr{}/final_results_train_merged.xlsx"
-                                 .format(levels,kernel_size,lr))
-            df_loss_val.to_excel("./Grid_search/levels_{}_kernel_{}_lr{}/final_results_val_merged.xlsx"
-                                 .format(levels, kernel_size, lr))
+            df_loss_train.to_excel("./Grid_search/levels_{}_kernel_{}_lr{}/final_results_train_{}.xlsx"
+                                 .format(levels,kernel_size,lr, node))
+            df_loss_val.to_excel("./Grid_search/levels_{}_kernel_{}_lr{}/final_results_val_{}.xlsx"
+                                 .format(levels, kernel_size, lr, node))
 
 
