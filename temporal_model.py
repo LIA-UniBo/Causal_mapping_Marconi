@@ -23,5 +23,6 @@ class MLP(nn.Module):
         X = F.relu(self.fc1(X))
         X = F.relu(self.fc2(X))
         X = self.fc3(X)
+        #X = self.fc2(X)
         
         return X
