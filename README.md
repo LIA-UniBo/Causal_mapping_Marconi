@@ -6,4 +6,4 @@ Run the file `main_marconi.py` in order to generate the map of the input node (c
 The final graphs are put in the directory `results` and they can be shown using the application [Cytoscape](https://cytoscape.org/).
 # Example of final results:
 ![alt text](https://github.com/LIA-UniBo/Causal_mapping_Marconi/blob/main/results/img/merged_0.8.graphml.png)
-![alt text](https://github.com/LIA-UniBo/Causal_mapping_Marconi/blob/main/results/img/r207n02_0.8.png)
+![alt text](https://github.com/LIA-UniBo/Causal_mapping_Marconi/blob/main/results/img/r207n02_08.png)
