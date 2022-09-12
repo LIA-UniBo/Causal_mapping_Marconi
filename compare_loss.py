@@ -3,10 +3,10 @@ import statistics
 
 l = {}
 l_s = {}
-with open('./temporal_evaluation/loss_shift_64.json', 'r') as fp:
+with open('./temporal_evaluation/loss_shift_epoch30.json', 'r') as fp:
     l_s = json.load(fp)
 
-with open('./temporal_evaluation/loss_without_shift_64.json', 'r') as fp:
+with open('./temporal_evaluation/loss_without_shift_epoch30.json', 'r') as fp:
     l = json.load(fp)
 
 for f in l:

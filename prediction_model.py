@@ -10,11 +10,15 @@ import json
 
 graph_dir = './results/'
 graph = "merged_0.8.graphml"
-shift = True
+shift = False
 features = {}
 with open('./temporal_evaluation/feature_causes.json', 'r') as fp:
     features = json.load(fp)
 loss_dict = {}
+
+epochs = 30
+batch_size = 8
+
 
 for feature in  features:
     causes, weights = find_causes_weights_noloop(graph_dir + graph, feature)
@@ -52,7 +56,7 @@ for feature in  features:
 
     #train
     value_loss = []
-    for epoch in range(10):
+    for epoch in range(epochs):
         running_loss = 0.0
         for i, value in enumerate(train_data):
             inputs = value['data']
@@ -64,15 +68,16 @@ for feature in  features:
             loss.backward()
             optimizer.step()
         value_loss.append((running_loss/dataset_len))
-        print('Epoch:', epoch, 'loss:', running_loss/dataset_len)   
+        print('Epoch:', epoch, 'loss:', running_loss/dataset_len)  
+    loss_dict[feature] = value_loss 
     
 
 #save the loss
 if shift:
-    with open('./temporal_evaluation/loss_shift.json', 'w') as fp:
+    with open('./temporal_evaluation/loss_shift_batch8_epoch50.json', 'w') as fp:
         json.dump(loss_dict, fp)
 else:
-    with open('./temporal_evaluation/loss_without_shift.json', 'w') as fp:
+    with open('./temporal_evaluation/loss_without_shift_batch8_epoch50.json', 'w') as fp:
         json.dump(loss_dict, fp)
 
 
