@@ -25,12 +25,12 @@ for feature in  features:
 
     total = []
     #consider a distance of 2 if the causes are < 5
-    if features[feature] < 5:
-        for i in causes:
-            cause, weight = find_causes_weights_noloop('./results/merged_0.8.graphml', i)
-            total.extend(cause)
-            for j in weight:
-                weights[j] = weight[j] + weights[i]
+    #if features[feature] < 5:
+     #   for i in causes:
+      #      cause, weight = find_causes_weights_noloop('./results/merged_0.8.graphml', i)
+       #     total.extend(cause)
+        #    for j in weight:
+         #       weights[j] = weight[j] + weights[i]
     total.extend(causes)
     causes = total
 
@@ -74,10 +74,10 @@ for feature in  features:
 
 #save the loss
 if shift:
-    with open('./temporal_evaluation/loss_shift_batch8_epoch50.json', 'w') as fp:
+    with open('./temporal_evaluation/loss_shift_epoch30_nodistance.json', 'w') as fp:
         json.dump(loss_dict, fp)
 else:
-    with open('./temporal_evaluation/loss_without_shift_batch8_epoch50.json', 'w') as fp:
+    with open('./temporal_evaluation/loss_without_shift_epoch30_nodistance.json', 'w') as fp:
         json.dump(loss_dict, fp)
 
 
