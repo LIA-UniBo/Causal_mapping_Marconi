@@ -21,7 +21,7 @@ levels = 2      #   >2 in order to add middle layers
 kernel_size = 4 #   size of the window
 dilation = 4    #   dilation of the convolution
 lr = 0.1
-epochs = 700
+epochs = 400
 batch_size = 8
 consider = []
 
@@ -47,7 +47,7 @@ for file in os.listdir("Data/Marconi_data/sliced_data_{}/train".format(node)):
 
 
 for effect in columns:
-    causes = find_causes(graphml,effect)
+    causes,_ = find_causes_weights(graphml,effect)
 
     if causes==[]:
         consider.append(effect)
@@ -89,8 +89,8 @@ for effect in columns:
             row.append(len(feature))
         results[effect] = row
 
-df_results = pd.DataFrame.from_dict(results,orient="index")
-df_results.to_excel(xls,index=False)
+#df_results = pd.DataFrame.from_dict(results,orient="index")
+#df_results.to_excel(xls,index=False)
 print(consider)
 
 

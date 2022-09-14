@@ -1,10 +1,7 @@
-import torch.nn as nn
 import torch.optim as optim
-import pandas as pd
-from utility import *
 from torch.utils.data import DataLoader
 from DatasetPredMarconi import DatasetPredMarconi
-from temporal_model import *
+from Networks.temporal_model import *
 import json
 
 
@@ -12,7 +9,7 @@ graph_dir = './results/'
 graph = "merged_0.8.graphml"
 shift = False
 features = {}
-with open('./temporal_evaluation/feature_causes.json', 'r') as fp:
+with open('results/temporal_evaluation/feature_causes.json', 'r') as fp:
     features = json.load(fp)
 loss_dict = {}
 
@@ -74,10 +71,10 @@ for feature in  features:
 
 #save the loss
 if shift:
-    with open('./temporal_evaluation/loss_shift_epoch30_nodistance.json', 'w') as fp:
+    with open('results/temporal_evaluation/loss_shift_epoch30_nodistance.json', 'w') as fp:
         json.dump(loss_dict, fp)
 else:
-    with open('./temporal_evaluation/loss_without_shift_epoch30_nodistance.json', 'w') as fp:
+    with open('results/temporal_evaluation/loss_without_shift_epoch30_nodistance.json', 'w') as fp:
         json.dump(loss_dict, fp)
 
 

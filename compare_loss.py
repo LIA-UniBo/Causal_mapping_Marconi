@@ -12,20 +12,20 @@ def draw_result(epochs, lst_loss_shift, lst_loss, title):
     plt.title(title+': '+str(causes[title])+' direct causes')
 
     # save image
-    plt.savefig('./temporal_evaluation/plots/no_drop_nodistance_'+title+".png") 
+    plt.savefig('./results/temporal_evaluation/plots/no_drop_nodistance_'+title+".png")
     # show
     plt.show()
 
 l = {}
 l_s = {}
 causes = {}
-with open('./temporal_evaluation/loss_shift_epoch30_nodistance.json', 'r') as fp:
+with open('results/temporal_evaluation/loss_shift_epoch30_nodistance.json', 'r') as fp:
     l_s = json.load(fp)
 
-with open('./temporal_evaluation/loss_without_shift_epoch30_nodistance.json', 'r') as fp:
+with open('results/temporal_evaluation/loss_without_shift_epoch30_nodistance.json', 'r') as fp:
     l = json.load(fp)
 
-with open('./temporal_evaluation/feature_causes.json', 'r') as fp:
+with open('results/temporal_evaluation/feature_causes.json', 'r') as fp:
     causes = json.load(fp)
 
 for f in l:

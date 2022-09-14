@@ -74,13 +74,6 @@ for col in map_dataframes_train:
     map_module[col] = module
 print("-------Training done")
 
-
-print("-------Saving all the models")
-for col in map_dataframes_train:
-    torch.save(map_module[col].network.state_dict(),"./trained_model/model_{}.pth".format(col))
-print("-------Done")
-
-
 effect = 0
 for col in map_dataframes_train:
     print("-------Interpreting attention for: "+str(col))
