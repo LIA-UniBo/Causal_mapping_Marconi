@@ -184,15 +184,28 @@ def compute_f1(pr_cause_effect_map, gt_cause_effect_map, depth):
 
     return f1,f1_prime
 
+def find_causes_weights_noloop(graphml,effect):
+    graph = nx.read_graphml(graphml)
+    graph.remove_edges_from(nx.selfloop_edges(graph))
+    edges = graph.edges(data=True)
+    causes = []
+    weights = {}
+    for edge in edges:
+        if edge[1]==effect: 
+            causes.append(edge[0])
+            weights[edge[0]] = graph[edge[0]][effect]['weight']
+    return causes, weights
 
-def find_causes(graphml,effect):
+def find_causes_weights(graphml,effect):
     graph = nx.read_graphml(graphml)
     edges = graph.edges(data=True)
     causes = []
+    weights = {}
     for edge in edges:
         if edge[1]==effect:
             causes.append(edge[0])
-    return causes
+            weights[edge[0]] = graph[edge[0]][effect]['weight']
+    return causes, weights
 
 def find_indipendent_feature(graphml,effect,distance=4):
     graph = nx.read_graphml(graphml)
